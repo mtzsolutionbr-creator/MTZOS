@@ -1031,7 +1031,17 @@ function renderGerenciarPresetsModal(isServ){
         </div>
       </div>
     </div>
-  </div>`;
+    </div>`;
+
+  document.getElementById('closeModalPreset').addEventListener('click', () => {
+    modalRoot.innerHTML='';
+  });
+
+  document.getElementById('modalBgPreset').addEventListener('click', (e) => {
+    if(e.target.id === 'modalBgPreset'){
+      modalRoot.innerHTML='';
+    }
+  });
 
   modalRoot.querySelectorAll('[data-del]').forEach(btn=>{
     btn.addEventListener('click', async ()=>{
@@ -1828,6 +1838,7 @@ iniciarComSenha();
 </script>
 </body>
 </html>
+
 
 
 
