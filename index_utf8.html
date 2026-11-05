@@ -157,7 +157,7 @@
     </nav>
     <button id="logoutBtn" class="btn btn-outline btn-sm" style="margin-left:10px;">Sair</button>
   </header>
-  <div class="muted-small" style="text-align:center;margin:-10px 0 14px;">Versão MTZOS â€” CEP automático via ViaCEP • banco compartilhado em tempo real (Firebase)</div>
+  <div class="muted-small" style="text-align:center;margin:-10px 0 14px;">Versão MTZOS — CEP automático via ViaCEP • banco compartilhado em tempo real (Firebase)</div>
 
   <div id="tab-novo">
     <div class="card">
@@ -231,7 +231,7 @@
           <label>Status</label>
           <select id="fStatus">
             <option value="orcamento">Orçamento (proposta)</option>
-            <option value="aprovado">Aprovado â€” em execução</option>
+            <option value="aprovado">Aprovado — em execução</option>
             <option value="concluido">Concluído</option>
             <option value="recusado">Recusado</option>
           </select>
@@ -318,7 +318,7 @@ const EMPRESA = {
   nome: "MTZ Soluções em Tecnologia",
   tecnico: "Emerson Martinez",
   telefone: "(11) 94978-9772",
-  endereco: "TV Papa Paulo I, 41 â€“ Vila Anita Costa, Jandira - SP",
+  endereco: "TV Papa Paulo I, 41 – Vila Anita Costa, Jandira — SP",
   cnpj: ""
 };
 
@@ -432,7 +432,7 @@ const PRESETS_SERVICOS_PADRAO = [
   "valor": 120
  },
  {
-  "descricao": "Instalação de ponto de rede (mão de obra por ponto, material Ã  parte)",
+  "descricao": "Instalação de ponto de rede (mão de obra por ponto, material à parte)",
   "valor": 120
  },
  {
@@ -752,7 +752,7 @@ function recalcTotal(){
   const sd = document.getElementById('saldoDisplay');
   if(entrada > 0){
     const pct = total > 0 ? Math.round(entrada/total*100) : 0;
-    sd.textContent = 'Entrada de ' + fmtMoney(entrada) + (total>0 ? ' ('+pct+'% do total)' : '') + ' â€” saldo na entrega: ' + fmtMoney(Math.max(total-entrada,0));
+    sd.textContent = 'Entrada de ' + fmtMoney(entrada) + (total>0 ? ' ('+pct+'% do total)' : '') + ' — saldo na entrega: ' + fmtMoney(Math.max(total-entrada,0));
   } else {
     sd.textContent = '';
   }
@@ -805,7 +805,7 @@ function renderGerenciarEquipModal(){
   const rowsHtml = presetsEquipamentos.length ? presetsEquipamentos.map(p=>`
     <div class="preset-manage-row" data-id="${p.id}" style="grid-template-columns:1fr 34px 34px;">
       <input type="text" class="presetDescInp" value="${esc(p.descricao)}" style="margin:0;padding:6px 8px;font-size:13px;">
-      <button class="icon-btn" title="Salvar alterações" data-save="${p.id}" style="color:var(--ok);">âœ”</button>
+      <button class="icon-btn" title="Salvar alterações" data-save="${p.id}" style="color:var(--ok);">✔</button>
       <button class="icon-btn" title="Remover" data-del="${p.id}">✕</button>
     </div>`).join('') : '<div class="empty">Nenhum equipamento cadastrado ainda.</div>';
   modalRoot.innerHTML = `
@@ -823,7 +823,7 @@ function renderGerenciarEquipModal(){
         </div>
         <div style="padding:0 12px 14px;">
           <button class="btn btn-outline btn-sm" id="equipImportar" type="button" style="width:100%;">Carregar lista sugerida MTZ</button>
-          <div class="muted-small" style="margin-top:6px;">Adiciona só o que ainda não existe. Para mudar um nome, edite na lista e clique no âœ” (ou Enter).</div>
+          <div class="muted-small" style="margin-top:6px;">Adiciona só o que ainda não existe. Para mudar um nome, edite na lista e clique no ✔ (ou Enter).</div>
         </div>
       </div>
     </div>
@@ -879,13 +879,13 @@ function renderPresetSelects(){
   const selServ = document.getElementById('servicoPresetSelect');
   const cur1 = selServ.value;
   selServ.innerHTML = '<option value="">+ Inserir serviço padrão...</option>' +
-    presetsServicos.map(p=>`<option value="${p.id}">${(p.descricao||'').replace(/</g,'&lt;')}${p.valor>0?' â€” '+fmtMoney(p.valor):''}</option>`).join('');
+    presetsServicos.map(p=>`<option value="${p.id}">${(p.descricao||'').replace(/</g,'&lt;')}${p.valor>0?' — '+fmtMoney(p.valor):''}</option>`).join('');
   selServ.value = cur1 && presetsServicos.some(p=>p.id===cur1) ? cur1 : '';
 
   const selPeca = document.getElementById('pecaPresetSelect');
   const cur2 = selPeca.value;
   selPeca.innerHTML = '<option value="">+ Inserir peça padrão...</option>' +
-    presetsPecas.map(p=>`<option value="${p.id}">${(p.descricao||'').replace(/</g,'&lt;')} â€” ${fmtMoney(p.valor)}</option>`).join('');
+    presetsPecas.map(p=>`<option value="${p.id}">${(p.descricao||'').replace(/</g,'&lt;')} — ${fmtMoney(p.valor)}</option>`).join('');
   selPeca.value = cur2 && presetsPecas.some(p=>p.id===cur2) ? cur2 : '';
 }
 
@@ -1005,7 +1005,7 @@ function renderGerenciarPresetsModal(isServ){
     <div class="preset-manage-row" data-id="${p.id}">
       <input type="text" class="presetDescInp" value="${(p.descricao||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;')}" style="margin:0;padding:6px 8px;font-size:13px;">
       <input type="number" step="0.01" class="presetValorInp" value="${p.valor!==undefined?p.valor:''}" placeholder="0,00" style="margin:0;padding:6px 8px;font-size:13px;">
-      <button class="icon-btn" title="Salvar alterações" data-save="${p.id}" style="color:var(--ok);">âœ”</button>
+      <button class="icon-btn" title="Salvar alterações" data-save="${p.id}" style="color:var(--ok);">✔</button>
       <button class="icon-btn" title="Remover" data-del="${p.id}">✕</button>
     </div>`).join('') : '<div class="empty">Nenhum padrão cadastrado ainda.</div>';
 
@@ -1027,7 +1027,7 @@ function renderGerenciarPresetsModal(isServ){
         </div>
         <div style="padding:0 12px 14px;">
           <button class="btn btn-outline btn-sm" id="presetImportar" type="button" style="width:100%;">Carregar lista sugerida MTZ (valores médios da região)</button>
-          <div class="muted-small" style="margin-top:6px;">Adiciona só o que ainda não existe e preenche o valor dos que estão sem preço. Para mudar nome ou valor, edite na lista acima e clique no âœ” (ou aperte Enter).</div>
+          <div class="muted-small" style="margin-top:6px;">Adiciona só o que ainda não existe e preenche o valor dos que estão sem preço. Para mudar nome ou valor, edite na lista acima e clique no ✔ (ou aperte Enter).</div>
         </div>
       </div>
     </div>
@@ -1114,7 +1114,7 @@ function maskCpf(v){
 function montarEndereco(rua, numero, bairro, cidade, uf){
   let a = (rua||'').trim();
   if(numero) a += (a ? ', ' : '') + numero;
-  const loc = [cidade, uf].filter(Boolean).join(' - ');
+  const loc = [cidade, uf].filter(Boolean).join(' — ');
   return [a, bairro, loc].filter(Boolean).join(', ');
 }
 document.getElementById('fCliCep').addEventListener('input', async (e)=>{
@@ -1499,7 +1499,7 @@ function statusBadge(status){
     concluido: ['Concluído','badge-concl'],
     recusado: ['Recusado','badge-recus']
   };
-  const [label, cls] = map[status] || ['â€”',''];
+  const [label, cls] = map[status] || [' — ',''];
   return `<span class="badge ${cls}">${label}</span>`;
 }
 
@@ -1550,7 +1550,7 @@ function renderClientes(){
   let html = '<table class="hist"><thead><tr><th>Nome</th><th>Telefone</th><th>Endereço</th><th>Serviços</th></tr></thead><tbody>';
   list.forEach(c=>{
     const count = ordens.filter(o => (o.clienteNome||'').toLowerCase() === (c.nome||'').toLowerCase()).length;
-    html += `<tr data-nome="${c.nome.replace(/"/g,'&quot;')}"><td>${c.nome}</td><td>${c.telefone||'â€”'}</td><td>${montarEndereco(c.endereco,c.numero,c.bairro,c.cidade,c.uf)||'â€”'}</td><td>${count}</td></tr>`;
+    html += `<tr data-nome="${c.nome.replace(/"/g,'&quot;')}"><td>${c.nome}</td><td>${c.telefone||' — '}</td><td>${montarEndereco(c.endereco,c.numero,c.bairro,c.cidade,c.uf)||' — '}</td><td>${count}</td></tr>`;
   });
   html += '</tbody></table>';
   wrap.innerHTML = html;
@@ -1570,13 +1570,13 @@ function abrirDetalhe(id){
   const modalRoot = document.getElementById('modalRoot');
   const itensRows = (o.itens||[]).map(it=>`<tr><td>${it.descricao||''}</td><td style="text-align:right;">${fmtMoney(it.valor)}</td></tr>`).join('');
   const servicosLis = (o.servicos||[]).map(s=>`<li>${s}</li>`).join('');
-  const statusLabelMap = {orcamento:'Orçamento (proposta)', aprovado:'Aprovado â€” em execução', concluido:'Concluído', recusado:'Recusado'};
+  const statusLabelMap = {orcamento:'Orçamento (proposta)', aprovado:'Aprovado — em execução', concluido:'Concluído', recusado:'Recusado'};
 
   modalRoot.innerHTML = `
   <div class="modal-bg" id="modalBg">
     <div class="modal">
       <div class="modal-head">
-        <div><strong>#${o.numero}</strong> â€” ${statusBadge(o.status)}</div>
+        <div><strong>#${o.numero}</strong> — ${statusBadge(o.status)}</div>
         <div>
           <button class="btn btn-outline btn-sm" id="editBtn">Editar</button>
           <button class="btn btn-outline btn-sm" id="printNativeBtn">Imprimir</button>
@@ -1594,11 +1594,11 @@ function abrirDetalhe(id){
             <div><b>Endereço</b>${EMPRESA.endereco}</div>
           </div>
           <div class="doc-grid">
-            <div><b>Cliente</b>${o.clienteNome||''}<br><b style="margin-top:6px;">Telefone</b>${o.clienteTelefone||'â€”'}<br><b style="margin-top:6px;">${o.clienteDocTipo||'CPF'}</b>${o.clienteDocNumero||'â€”'}</div>
-            <div><b>Endereço do cliente</b>${montarEndereco(o.clienteEndereco,o.clienteNumero,o.clienteBairro,o.clienteCidade,o.clienteUf)||'â€”'}${o.clienteCep?(' â€” CEP '+o.clienteCep):''}<br><b style="margin-top:6px;">Data</b>${fmtDate(o.data)}</div>
+            <div><b>Cliente</b>${o.clienteNome||''}<br><b style="margin-top:6px;">Telefone</b>${o.clienteTelefone||' — '}<br><b style="margin-top:6px;">${o.clienteDocTipo||'CPF'}</b>${o.clienteDocNumero||' — '}</div>
+            <div><b>Endereço do cliente</b>${montarEndereco(o.clienteEndereco,o.clienteNumero,o.clienteBairro,o.clienteCidade,o.clienteUf)||' — '}${o.clienteCep?(' — CEP '+o.clienteCep):''}<br><b style="margin-top:6px;">Data</b>${fmtDate(o.data)}</div>
           </div>
           <div class="doc-section-title">Equipamento</div>
-          <div style="font-size:13.5px;"><b>Modelo:</b> ${o.equipamento||'â€”'}<br><b>Problema relatado:</b> ${o.problema||'â€”'}</div>
+          <div style="font-size:13.5px;"><b>Modelo:</b> ${o.equipamento||' — '}<br><b>Problema relatado:</b> ${o.problema||' — '}</div>
           ${servicosLis ? `<div class="doc-section-title">Serviço Executado</div><ul>${servicosLis}</ul>` : ''}
           <div class="doc-section-title">Detalhamento de Valores</div>
           <table>
@@ -1606,20 +1606,20 @@ function abrirDetalhe(id){
             <tbody>${itensRows}</tbody>
             <tbody><tr class="tot"><td>TOTAL</td><td style="text-align:right;">${fmtMoney(o.total)}</td></tr></tbody>
             ${o.entrada>0 ? `<tbody>
-              <tr><td>Entrada (sinal) â€” ${o.entradaPaga?'recebida':'a pagar na aprovação'}</td><td style="text-align:right;">${fmtMoney(o.entrada)}</td></tr>
+              <tr><td>Entrada (sinal) — ${o.entradaPaga?'recebida':'a pagar na aprovação'}</td><td style="text-align:right;">${fmtMoney(o.entrada)}</td></tr>
               <tr><td><b>Saldo a pagar na entrega</b></td><td style="text-align:right;"><b>${fmtMoney(Math.max((o.total||0)-o.entrada,0))}</b></td></tr>
             </tbody>` : ''}
           </table>
           ${o.observacoes ? `<div class="doc-section-title">Observações</div><div class="obs">${o.observacoes}</div>` : ''}
           <div class="doc-section-title" style="margin-top:14px;">Status</div>
           <div style="font-size:13.5px;">${statusLabelMap[o.status]||''}</div>
-          <div class="sign">${EMPRESA.tecnico} â€” Técnico Responsável</div>
+          <div class="sign">${EMPRESA.tecnico} — Técnico Responsável</div>
           <div class="doc-footer">${EMPRESA.nome}${EMPRESA.cnpj?' • CNPJ '+EMPRESA.cnpj:''} • ${EMPRESA.endereco} • ${EMPRESA.telefone}</div>
           ${o.status==='orcamento' ? `
           <div class="doc-autoriza">
             <div class="corte">✂ DESTAQUE AQUI</div>
             <div class="aut-titulo">AUTORIZAÇÃO DO CLIENTE PARA EXECUÇÃO DO SERVIÇO</div>
-            <div style="font-size:12.5px;"><b>Orçamento Nº ${String(o.numero).padStart(4,'0')}</b>${o.equipamento?' â€” Equipamento: '+o.equipamento:''} â€” <b>Valor total: ${fmtMoney(o.total)}</b></div>
+            <div style="font-size:12.5px;"><b>Orçamento Nº ${String(o.numero).padStart(4,'0')}</b>${o.equipamento?' — Equipamento: '+o.equipamento:''} — <b>Valor total: ${fmtMoney(o.total)}</b></div>
             <p>Eu, <b>${o.clienteNome||'____________________________'}</b>, ${o.clienteDocTipo||'CPF'} ${o.clienteDocNumero||'_______________'}, autorizo a ${EMPRESA.nome} a executar os serviços descritos neste orçamento, no valor total de <b>${fmtMoney(o.total)}</b>, estando ciente dos serviços, valores e condições apresentados.${o.entrada>0 ? ` Fica acordada a <b>entrada de ${fmtMoney(o.entrada)}</b>${o.total>0?' ('+Math.round(o.entrada/o.total*100)+'% do total)':''} na aprovação, com saldo de <b>${fmtMoney(Math.max((o.total||0)-o.entrada,0))}</b> na conclusão do serviço.` : ''}</p>
             <div class="aut-linhas">
               <div>Data: ____/____/________</div>
@@ -1828,6 +1828,13 @@ iniciarComSenha();
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
 
 
 
