@@ -1521,7 +1521,10 @@ function renderHistorico(){
     list = list.filter(o =>
       (o.clienteNome||'').toLowerCase().includes(q) ||
       String(o.numero||'').includes(q) ||
-      (o.equipamento||'').toLowerCase().includes(q)
+      (o.equipamento||'').toLowerCase().includes(q) ||
+      (o.status||'').toLowerCase().includes(q) ||
+      (o.clienteDocNumero||'').toLowerCase().includes(q) ||
+      (o.clienteTelefone||'').toLowerCase().includes(q)
     );
   }
   if(!list.length){
@@ -1838,6 +1841,8 @@ iniciarComSenha();
 </script>
 </body>
 </html>
+
+
 
 
 
