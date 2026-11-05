@@ -1,0 +1,14 @@
+﻿MTZOS MAPA DO SISTEMA
+
+131  = fim CSS
+317  = const EMPRESA
+333  = PRESETS
+1567 = abrirDetalhe()
+1640 = gerarPdf()
+1671 = firebaseConfig
+
+Status:
+Sistema funcionando
+Firebase funcionando
+PDF funcionando
+Login funcionando
