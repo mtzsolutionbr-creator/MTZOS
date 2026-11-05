@@ -67,9 +67,9 @@
   .modal-head{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--border);}
   .modal-body{padding:0;}
   .close-x{background:none;border:none;font-size:20px;color:var(--muted);cursor:pointer;}
-  .doc{background:#fff;color:#1D2733;padding:34px 30px;}
-  .doc-header{text-align:center;margin-bottom:14px;}
-  .doc-header img{height:60px;}
+  .doc{margin-top:0;background:#fff;color:#1D2733;padding:8px 20px 20px 20px;}
+  .doc-header{text-align:center;margin:0 0 4px 0;padding:0;}
+  .doc-header img{height:75px;display:block;margin:0 auto;}
   .doc hr{border:none;border-top:2px solid var(--navy);margin:14px 0 18px;}
   .doc h3{text-align:center;color:var(--navy);margin:0 0 16px;font-size:19px;}
   .doc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;border:1px solid #ccc;border-radius:6px;padding:8px 10px;margin-bottom:8px;font-size:13px;}
@@ -126,7 +126,7 @@
   @media print{
     body *{visibility:hidden;}
     .doc,.doc *{visibility:visible;}
-    .doc{position:absolute;top:0;left:0;width:100%;padding:0 20px;}
+    .doc{margin-top:0;position:absolute;top:0;left:0;width:100%;padding:0 20px;}
   }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -1636,7 +1636,7 @@ function abrirDetalhe(id){
             <div style="font-size:12.5px;"><b>Orçamento Nº ${String(o.numero).padStart(4,'0')}</b>${o.equipamento?' — Equipamento: '+o.equipamento:''} — <b>Valor total: ${fmtMoney(o.total)}</b></div>
             <p>Eu, <b>${o.clienteNome||'____________________________'}</b>, ${o.clienteDocTipo||'CPF'} ${o.clienteDocNumero||'_______________'}, autorizo a ${EMPRESA.nome} a executar os serviços descritos neste orçamento, no valor total de <b>${fmtMoney(o.total)}</b>, estando ciente dos serviços, valores e condições apresentados.${o.entrada>0 ? ` Fica acordada a <b>entrada de ${fmtMoney(o.entrada)}</b>${o.total>0?' ('+Math.round(o.entrada/o.total*100)+'% do total)':''} na aprovação, com saldo de <b>${fmtMoney(Math.max((o.total||0)-o.entrada,0))}</b> na conclusão do serviço.` : ''}</p>
             <div class="aut-linhas">
-              <div>Data: ____/____/________</div>
+              <div><div>Data: ${fmtDate(o.data)}</div> </div>
               <div>Assinatura do cliente</div>
             </div>
           </div>` : ''}
@@ -1842,6 +1842,14 @@ iniciarComSenha();
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
 
 
 
