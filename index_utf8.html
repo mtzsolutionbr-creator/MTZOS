@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MTZ Â· Ordens de Serviço &amp; Orçamentos</title>
+<title>MTZ · Ordens de Serviço &amp; Orçamentos</title>
 <style>
   :root{
     --navy:#1F3864; --navy-2:#16294a; --blue:#1F6FD6; --blue-light:#3DA5FF;
@@ -188,7 +188,7 @@
         </div>
         <div>
           <label>Número</label>
-          <input type="text" id="fCliNumero" placeholder="NÂº" maxlength="10">
+          <input type="text" id="fCliNumero" placeholder="Nº" maxlength="10">
         </div>
       </div>
       <div class="rowCid">
@@ -209,7 +209,7 @@
       <div class="row">
         <div>
           <label>Documento do cliente
-            <button type="button" id="configCamposBtn" class="btn-config-gear" title="Configurar campos obrigatórios">âš™</button>
+            <button type="button" id="configCamposBtn" class="btn-config-gear" title="Configurar campos obrigatórios">⚙</button>
           </label>
           <div style="display:flex; gap:8px;">
             <select id="fCliDocTipo" style="max-width:100px;">
@@ -1296,7 +1296,7 @@ function renderClienteSelect(){
   const sel = document.getElementById('cliSalvoSelect');
   const lista = [...clientes].sort((a,b)=>(a.nome||'').localeCompare(b.nome||''));
   sel.innerHTML = '<option value="">+ Inserir cliente salvo' + (lista.length ? ' ('+lista.length+')' : '') + '...</option>' +
-    lista.map(c=>`<option value="${c.id}">${(c.nome||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')}${c.telefone?' Â· '+c.telefone:''}</option>`).join('');
+    lista.map(c=>`<option value="${c.id}">${(c.nome||'').replace(/&/g,'&amp;').replace(/</g,'&lt;')}${c.telefone?' · '+c.telefone:''}</option>`).join('');
   sel.value = '';
 }
 document.getElementById('cliSalvoSelect').addEventListener('change', (e)=>{
@@ -1319,7 +1319,7 @@ document.getElementById('fCliNome').addEventListener('input', (e)=>{
   suggestDiv.className = 'client-suggest';
   matches.forEach(c=>{
     const item = document.createElement('div');
-    item.textContent = c.nome + (c.telefone? ' Â· '+c.telefone : '');
+    item.textContent = c.nome + (c.telefone? ' · '+c.telefone : '');
     item.addEventListener('click', ()=>{
       preencherCliente(c);
       box.innerHTML = '';
@@ -1588,7 +1588,7 @@ function abrirDetalhe(id){
         <div class="doc" id="docPrint">
           <div class="doc-header"><img src="${LOGO_CLARO}" alt="MTZ"></div>
           <hr>
-          <h3>${o.status==='orcamento' ? 'ORÃ‡AMENTO DE SERVIÃ‡O TÃ‰CNICO' : 'ORDEM DE SERVIÃ‡O'} NÂº ${String(o.numero).padStart(4,'0')}</h3>
+          <h3>${o.status==='orcamento' ? 'ORÇAMENTO DE SERVIÇO TÉCNICO' : 'ORDEM DE SERVIÇO'} Nº ${String(o.numero).padStart(4,'0')}</h3>
           <div class="doc-grid">
             <div><b>Técnico responsável</b>${EMPRESA.tecnico}<br><b style="margin-top:6px;">Telefone</b>${EMPRESA.telefone}</div>
             <div><b>Endereço</b>${EMPRESA.endereco}</div>
@@ -1617,9 +1617,9 @@ function abrirDetalhe(id){
           <div class="doc-footer">${EMPRESA.nome}${EMPRESA.cnpj?' • CNPJ '+EMPRESA.cnpj:''} • ${EMPRESA.endereco} • ${EMPRESA.telefone}</div>
           ${o.status==='orcamento' ? `
           <div class="doc-autoriza">
-            <div class="corte">âœ‚ DESTAQUE AQUI</div>
-            <div class="aut-titulo">AUTORIZAÃ‡ÃƒO DO CLIENTE PARA EXECUÃ‡ÃƒO DO SERVIÃ‡O</div>
-            <div style="font-size:12.5px;"><b>Orçamento NÂº ${String(o.numero).padStart(4,'0')}</b>${o.equipamento?' â€” Equipamento: '+o.equipamento:''} â€” <b>Valor total: ${fmtMoney(o.total)}</b></div>
+            <div class="corte">✂ DESTAQUE AQUI</div>
+            <div class="aut-titulo">AUTORIZAÇÃO DO CLIENTE PARA EXECUÇÃO DO SERVIÇO</div>
+            <div style="font-size:12.5px;"><b>Orçamento Nº ${String(o.numero).padStart(4,'0')}</b>${o.equipamento?' â€” Equipamento: '+o.equipamento:''} â€” <b>Valor total: ${fmtMoney(o.total)}</b></div>
             <p>Eu, <b>${o.clienteNome||'____________________________'}</b>, ${o.clienteDocTipo||'CPF'} ${o.clienteDocNumero||'_______________'}, autorizo a ${EMPRESA.nome} a executar os serviços descritos neste orçamento, no valor total de <b>${fmtMoney(o.total)}</b>, estando ciente dos serviços, valores e condições apresentados.${o.entrada>0 ? ` Fica acordada a <b>entrada de ${fmtMoney(o.entrada)}</b>${o.total>0?' ('+Math.round(o.entrada/o.total*100)+'% do total)':''} na aprovação, com saldo de <b>${fmtMoney(Math.max((o.total||0)-o.entrada,0))}</b> na conclusão do serviço.` : ''}</p>
             <div class="aut-linhas">
               <div>Data: ____/____/________</div>
@@ -1828,4 +1828,7 @@ iniciarComSenha();
 </script>
 </body>
 </html>
+
+
+
 
