@@ -277,6 +277,18 @@
       </div>
       <div id="saldoDisplay" class="muted-small" style="margin-top:6px;"></div>
 
+<label>Valor Recebido (R$)</label>
+<input type="number"
+       id="fRecebido"
+       step="0.01"
+       min="0"
+       placeholder="0,00"
+       style="max-width:150px;">
+
+<div id="recebidoDisplay"
+     class="muted-small"
+     style="margin-top:6px;"></div>
+
       <label>Observações</label>
       <textarea id="fObs" placeholder="Ex.: Orçamento válido por 15 dias a partir da data de emissão."></textarea>
 
@@ -751,6 +763,8 @@ function recalcTotal(){
   document.getElementById('totalDisplay').textContent = fmtMoney(total);
   const entrada = Number(document.getElementById('fEntrada').value)||0;
   const sd = document.getElementById('saldoDisplay');
+  const recebido = Number(document.getElementById('fRecebido').value)||0;
+  const rd = document.getElementById('recebidoDisplay');
   if(entrada > 0){
     const pct = total > 0 ? Math.round(entrada/total*100) : 0;
     sd.textContent = 'Entrada de ' + fmtMoney(entrada) + (total>0 ? ' ('+pct+'% do total)' : '') + ' — saldo na entrega: ' + fmtMoney(Math.max(total-entrada,0));
@@ -760,6 +774,7 @@ function recalcTotal(){
   return total;
 }
 document.getElementById('fEntrada').addEventListener('input', recalcTotal);
+document.getElementById('fRecebido').addEventListener('input', recalcTotal);
 document.querySelectorAll('[data-pct]').forEach(b=>{
   b.addEventListener('click', ()=>{
     const total = recalcTotal();
@@ -1362,6 +1377,7 @@ function limparForm(){
   document.getElementById('fServicos').value='';
   document.getElementById('fObs').value='Orçamento válido por 15 dias a partir da data de emissão.';
   document.getElementById('fEntrada').value='';
+  document.getElementById('fRecebido').value='';
   document.getElementById('fEntradaPaga').checked=false;
   document.getElementById('itensList').innerHTML='';
   addItemRow('','');
@@ -1390,6 +1406,7 @@ function carregarNoForm(o){
   document.getElementById('fServicos').value = (o.servicos||[]).join("\n");
   document.getElementById('fObs').value = o.observacoes||'';
   document.getElementById('fEntrada').value = o.entrada>0 ? o.entrada : '';
+  document.getElementById('fRecebido').value = o.recebido>0 ? o.recebido : '';
   document.getElementById('fEntradaPaga').checked = !!o.entradaPaga;
   document.getElementById('itensList').innerHTML='';
   (o.itens||[]).forEach(it=> addItemRow(it.descricao, it.valor));
@@ -1438,6 +1455,7 @@ document.getElementById('salvarBtn').addEventListener('click', async ()=>{
     total: total,
     observacoes: document.getElementById('fObs').value.trim(),
     entrada: Number(document.getElementById('fEntrada').value)||0,
+    recebido: Number(document.getElementById('fRecebido').value)||0,
     entradaPaga: document.getElementById('fEntradaPaga').checked,
     atualizadoEm: Date.now()
   };
@@ -1621,7 +1639,9 @@ function abrirDetalhe(id){
             <tbody><tr class="tot"><td>TOTAL</td><td style="text-align:right;">${fmtMoney(o.total)}</td></tr></tbody>
             ${o.entrada>0 ? `<tbody>
               <tr><td>Entrada (sinal) — ${o.entradaPaga?'recebida':'a pagar na aprovação'}</td><td style="text-align:right;">${fmtMoney(o.entrada)}</td></tr>
-              <tr><td><b>Saldo a pagar na entrega</b></td><td style="text-align:right;"><b>${fmtMoney(Math.max((o.total||0)-o.entrada,0))}</b></td></tr>
+              <tr><td>Valor recebido</td><td style="text-align:right;">${fmtMoney(o.recebido||0)}</td></tr>
+<tr><td><b>Saldo devedor</b></td><td style="text-align:right;"><b>${fmtMoney(Math.max((o.total||0)-(o.recebido||0),0))}</b></td></tr>
+<tr><td><b>Saldo a pagar na entrega</b></td><td style="text-align:right;"><b>${fmtMoney(Math.max((o.total||0)-o.entrada,0))}</b></td></tr>
             </tbody>` : ''}
           </table>
           ${o.observacoes ? `<div class="doc-section-title">Observações</div><div class="obs">${o.observacoes}</div>` : ''}
@@ -1842,6 +1862,15 @@ iniciarComSenha();
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
 
 
 
